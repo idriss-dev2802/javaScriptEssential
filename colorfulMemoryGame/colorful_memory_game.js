@@ -5,12 +5,10 @@ let score = 0;
 let timeLeft = 30;
 let gameInterval;
 
-
 const startbtn = document.getElementById('startbtn');
 const gameContainer = document.getElementById('game-container');
 const scoreElement = document.getElementById('score');
 const timerElement = document.getElementById('timer');
-
 
 function generateCards() {
     for (const color of cards) {
@@ -21,8 +19,6 @@ function generateCards() {
         gameContainer.appendChild(card);
     }
 }
-
-
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -30,8 +26,6 @@ function shuffle(array) {
     }
     return array;
 }
-
-
 function handleCardClick(event) {
     const card = event.target;
     if (!card.classList.contains('card') || card.classList.contains('matched')) {
@@ -44,8 +38,6 @@ function handleCardClick(event) {
         setTimeout(checkMatch, 500);
     }
 }
-
-
 function checkMatch() {
     const [card1, card2] = selectedCards;
     if (card1.dataset.color === card2.dataset.color) {
@@ -61,8 +53,6 @@ function checkMatch() {
     }
     selectedCards = [];
 }
-
-
 function startGame() {
     let timeLeft = 30;
     startbtn.disabled = true;
@@ -75,8 +65,6 @@ function startGame() {
     generateCards();
     gameContainer.addEventListener('click', handleCardClick);
 }
-
-
 function startGameTimer(timeLeft) {
     timerElement.textContent = `Time Left: ${timeLeft}`;
     gameInterval = setInterval(() => {
@@ -92,4 +80,5 @@ function startGameTimer(timeLeft) {
     }, 1000);
 }
 
+startbtn.addEventListener('click', startGame);
 
